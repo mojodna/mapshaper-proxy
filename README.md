@@ -44,5 +44,5 @@ natively support math expressions, a custom `math` handler is included,
 explaining the funky syntax.
 
 To create your own `cmds` query parameter, run
-`encodeURIComponent(\`-simplify 20%\`)` (or similar) in a JavaScript console
+`encodeURIComponent("-simplify 20%")` (or similar) in a JavaScript console
 to encode it.
