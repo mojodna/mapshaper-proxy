@@ -10,7 +10,7 @@ const mercator = new (require("@mapbox/sphericalmercator"))();
 
 const SOURCE = env.require("SOURCE");
 
-handlebars.registerHelper("math", function (lvalue, operator, rvalue, options) {
+handlebars.registerHelper("math", function(lvalue, operator, rvalue, options) {
   lvalue = parseFloat(lvalue);
   rvalue = parseFloat(rvalue);
 
@@ -27,13 +27,17 @@ const app = express().disable("x-powered-by");
 
 app.use(cors());
 
-app.get("/:z(\\d+)/:x(\\d+)/:y(\\d+).json", async (req, res, next) => {
-  const { x, y, z } = req.params;
+app.get(/(\d+)\/(\d+)\/(\d+)(@\d+(\.\d+)?x)?\.json/, async (req, res, next) => {
+  const z = req.params[0];
+  const x = req.params[1];
+  const y = req.params[2];
+  const scale = req.params[3];
   const { cmds, ...query } = req.query;
   const tile = [
     SOURCE.replace(/{z}/, z)
       .replace(/{x}/, x)
-      .replace(/{y}/, y),
+      .replace(/{y}/, y)
+      .replace(/{scale}/, scale || ""),
     querystring.stringify(query)
   ].join("?");
 

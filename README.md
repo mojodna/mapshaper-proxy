@@ -7,7 +7,7 @@ MapShaper commands in the URL.
 ## Starting
 
 ```bash
-SOURCE=http://localhost:8000/{z}/{x}/{y}.json npm start
+SOURCE=http://localhost:8000/{z}/{x}/{y}{scale}.json npm start
 ```
 
 ## Requesting Tiles
